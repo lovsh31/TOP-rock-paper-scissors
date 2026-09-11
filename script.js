@@ -21,18 +21,29 @@ function getComputerChoice(){
 //IF it is return the value
 //ELSE Warn the user and Ask the user to enter his answer again 
 function getUserChoice(){
-    let userPrompt = prompt("Enter rock, paper or scissors").toLowerCase();
-    if(userPrompt==="rock" || userPrompt==="paper" || userPrompt==="scissors"){
-        return userPrompt;
-    }else{
-        getUserChoice();
-    }    
+    let userPrompt = prompt("Enter rock, paper or scissors");
+    console.log(userPrompt);
+    while(userPrompt!==null){
+        let lower = userPrompt.toLowerCase();
+        if(lower==="rock" || lower==="paper" || lower==="scissors"){
+            console.log(lower);
+            return lower;
+         }else{
+            console.log(0);
+            userPrompt = prompt("Enter rock, paper or scissors");
+        }    
+    }   
+
+    console.log(2);
+    return false;
+        
 }
 
 
 //Create a function playGame that starts 5 round and decide a winner
 function playGame(){
     let countRound=0;
+    let userQuit = false;
     //Create two variable to keep score
     let userScore = 0;
     let computerScore = 0;
@@ -85,6 +96,7 @@ function playGame(){
         }else{
             switch(computerSelection){
                 case "rock":
+                    console.log("You lose! Rock beats Scissors");
                     computerScore++;
                     console.log("You: "+userScore);
                     console.log("Computer: "+computerScore);
@@ -93,10 +105,10 @@ function playGame(){
                     console.log("You win! Scissors beats Paper");
                     userScore++;
                     console.log("You: "+userScore);
+                    console.log("Computer: "+computerScore);
                     break;
-                case "scissors":
-                    console.log("You lose! Rock beats Scissors");
-                    console.log("Computer: "+computerScore);console.log("It's a tie!");
+                case "scissors":                    
+                    console.log("It's a tie!");
                     console.log("You: "+userScore);
                     console.log("Computer: "+computerScore);
                     break;                
@@ -107,16 +119,27 @@ function playGame(){
     while(countRound<5){
         //Create a variable computerChoice that contain a empty string
         let computerChoice = getComputerChoice();
-        console.log(computerChoice);
 
         //Create a variable userChoice that contain a empty string
         let userChoice = getUserChoice();
         console.log(userChoice);
-
-        playRound(userChoice,computerChoice);
-        countRound++;
+        //verify if play didn't quit
+        if(userChoice){
+            playRound(userChoice,computerChoice);
+            countRound++;
+        }else{
+            userQuit = true;
+            break;
+        }
     }
-    const finalMessage = (userScore>computerScore)?"You are the grand winner!":"You lose! Game Over";
-    console.log(finalMessage);
+    if (!userQuit){
+        const finalMessage = (userScore>computerScore)?"You are the grand winner!":
+            (userScore<computerScore)?"Game Over! You lose":
+            "The game is a TIE!";
+        console.log(finalMessage);
+    }else{
+        const finalMessage = "Don't be a chicken! Game Over";
+        console.log(finalMessage);
+    }
 }
 playGame();
