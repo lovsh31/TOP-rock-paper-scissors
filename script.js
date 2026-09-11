@@ -22,21 +22,15 @@ function getComputerChoice(){
 //ELSE Warn the user and Ask the user to enter his answer again 
 function getUserChoice(){
     let userPrompt = prompt("Enter rock, paper or scissors");
-    console.log(userPrompt);
     while(userPrompt!==null){
         let lower = userPrompt.toLowerCase();
         if(lower==="rock" || lower==="paper" || lower==="scissors"){
-            console.log(lower);
             return lower;
          }else{
-            console.log(0);
             userPrompt = prompt("Enter rock, paper or scissors");
         }    
     }   
-
-    console.log(2);
-    return false;
-        
+    return false;        
 }
 
 
@@ -122,7 +116,7 @@ function playGame(){
 
         //Create a variable userChoice that contain a empty string
         let userChoice = getUserChoice();
-        console.log(userChoice);
+
         //verify if play didn't quit
         if(userChoice){
             playRound(userChoice,computerChoice);
@@ -132,13 +126,13 @@ function playGame(){
             break;
         }
     }
-    if (!userQuit){
+    if (userQuit){
+        const finalMessage = "Don't be a chicken! Game Over";
+        console.log(finalMessage);
+    }else{
         const finalMessage = (userScore>computerScore)?"You are the grand winner!":
             (userScore<computerScore)?"Game Over! You lose":
             "The game is a TIE!";
-        console.log(finalMessage);
-    }else{
-        const finalMessage = "Don't be a chicken! Game Over";
         console.log(finalMessage);
     }
 }
