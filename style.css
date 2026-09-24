@@ -1,0 +1,73 @@
+/* CSS Reset for all margins and box-sizing model */
+*{
+    box-sizing: border-box;
+}
+/* Generic class */
+.inline-block{
+    display:inline-block;
+}
+.align-center{
+    margin: 0 auto;
+}
+
+
+p{
+    line-height: 1.5;
+    text-align: justify;
+    margin: 8px 0;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body{
+    margin: 0 auto;
+    text-align: center;
+}
+h1{ 
+    font-size: 80px;
+}
+h2{
+    font-size: 40px;
+}
+section{
+    min-height: 300px;
+    max-width:50%;
+    margin:0 auto;
+    padding:12px;
+    background-color: white;
+    border: 2px solid red;
+}
+.inline{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#scoreU,
+#scoreC{
+    font-size: 80px;
+    color: white;
+}
+#scoreU{
+    width: 150px;
+    heigth: 200px;
+    background-color: blue;
+}
+#scoreC{
+    width: 150px;
+    heigth: 200px;
+    background-color: red;
+}
+
+#display p{
+    text-align: center;
+}
+button{
+    width: 150px;
+    height: 75px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.messageFinal{
+    font-size:34px;
+    font-weight: bold;
+    color: rgb(174, 41, 41);
+}
