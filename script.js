@@ -1,3 +1,16 @@
+//Select elements
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const display = document.querySelector("#display");
+const score = document.querySelector("#score");
+const message = document.querySelector("#message");
+
+
+
+
+
+
 
 //Create a function getComputerChoice that randomly choose "Rock,Paper or scissors" for the computer and place it in computerChoice
 //Generate a random number in the variable randomNumber 
@@ -42,98 +55,107 @@ function playGame(){
     let userScore = 0;
     let computerScore = 0;
 
-    //Compare the value of userChoice and computerChoice, alert the use and increment the score
-    // rock > scissors
-    // paper > rock
-    // scissors > paper
-    function playRound(userSelection,computerSelection){
-        if(userSelection==="rock"){
-            switch(computerSelection){
-                case "rock":
-                    console.log("It's a tie!");
-                    console.log("You: "+userScore);
-                    console.log("Computer: "+computerScore);
-                    break;
-                case "paper":
-                    console.log("You lose! Paper beats Rock");
-                    computerScore++;
-                    console.log("You: "+userScore);
-                    console.log("Computer: "+computerScore);
-                    break;
-                case "scissors":
-                    console.log("You win! Rock beats Scissors");
-                    userScore++;
-                    console.log("You: "+userScore);
-                    console.log("Computer: "+computerScore);
-                    break;
-            }
-        }else if(userSelection==="paper"){
-            switch(computerSelection){
-                case "rock":
-                    console.log("You win! Paper beats Rock");
-                    userScore++;
-                    console.log("You: "+userScore);
-                    console.log("Computer: "+computerScore);
-                    break;
-                case "paper":
-                    console.log("It's a tie!");
-                    console.log("You: "+userScore);
-                    console.log("Computer: "+computerScore);
-                    break;
-                case "scissors":
-                    console.log("You lose! Scissors beats Paper");
-                    computerScore++;
-                    console.log("You: "+userScore);
-                    console.log("Computer: "+computerScore);
-                    break;
+    
+
+
+    function playRound(userSelection){
+        if(countRound<5){
+            computerChoice = getComputerChoice();
+            if(userSelection==="rock"){
+                switch(computerChoice){
+                    case "rock":
+                        message.textContent = "It's a tie!";
+                        score.textContent = `You: ${userScore} Computer: ${computerScore}`;                        
+                        break;
+                    case "paper":
+                        message.textContent = "You lose! Paper beats Rock";
+                        computerScore++;
+                        score.textContent = `You: ${userScore} Computer: ${computerScore}`;
+
+                        break;
+                    case "scissors":
+                        message.textContent = "You win! Rock beats Scissors";
+                        userScore++;
+                        score.textContent = `You: ${userScore} Computer: ${computerScore}`;
+
+                        break;
+                }
+            }else if(userSelection==="paper"){
+                switch(computerChoice){
+                    case "rock":
+                        message.textContent = "You win! Paper beats Rock";
+                        userScore++;
+                        score.textContent = `You: ${userScore} Computer: ${computerScore}`;
+
+                        break;
+                    case "paper":
+                        message.textContent = "It's a tie!";
+                        score.textContent = `You: ${userScore} Computer: ${computerScore}`;
+
+                        break;
+                    case "scissors":
+                        message.textContent = "You lose! Scissors beats Paper";
+                        computerScore++;
+                        score.textContent = `You: ${userScore} Computer: ${computerScore}`;
+                        break;
+                }
+            }else{
+                switch(computerChoice){
+                    case "rock":
+                        message.textContent = "You lose! Rock beats Scissors";
+                        computerScore++;
+                        score.textContent = `You: ${userScore} Computer: ${computerScore}`;
+
+                        break;
+                    case "paper":
+                        console.log("You win! Scissors beats Paper");
+                        userScore++;
+                        score.textContent = `You: ${userScore} Computer: ${computerScore}`;
+
+                        break;
+                    case "scissors":                    
+                        message.textContent = "It's a tie!";
+                        score.textContent = `You: ${userScore} Computer: ${computerScore}`;
+                        break;                
+                }
             }
         }else{
-            switch(computerSelection){
-                case "rock":
-                    console.log("You lose! Rock beats Scissors");
-                    computerScore++;
-                    console.log("You: "+userScore);
-                    console.log("Computer: "+computerScore);
-                    break;
-                case "paper":
-                    console.log("You win! Scissors beats Paper");
-                    userScore++;
-                    console.log("You: "+userScore);
-                    console.log("Computer: "+computerScore);
-                    break;
-                case "scissors":                    
-                    console.log("It's a tie!");
-                    console.log("You: "+userScore);
-                    console.log("Computer: "+computerScore);
-                    break;                
-            }
-        }
-    }
-
-    while(countRound<5){
-        //Create a variable computerChoice that contain a empty string
-        let computerChoice = getComputerChoice();
-
-        //Create a variable userChoice that contain a empty string
-        let userChoice = getUserChoice();
-
-        //verify if play didn't quit
-        if(userChoice){
-            playRound(userChoice,computerChoice);
-            countRound++;
-        }else{
-            userQuit = true;
-            break;
-        }
-    }
-    if (userQuit){
-        const finalMessage = "Don't be a chicken! Game Over";
-        console.log(finalMessage);
-    }else{
-        const finalMessage = (userScore>computerScore)?"You are the grand winner!":
+            const finalMessage = (userScore>computerScore)?"You are the grand winner!":
             (userScore<computerScore)?"Game Over! You lose":
             "The game is a TIE!";
+            console.log(finalMessage);
+        }
+    }
+
+        
+    //Create a variable computerChoice that contain a empty string
+    let computerChoice = "";
+
+    /*Create a variable userChoice that contain a empty string
+    let userChoice = getUserChoice();*/
+    
+    //event listener on button to start a round
+    rock.addEventListener("click", ()=>{
+        playRound("rock");
+        countRound++;
+    });
+    scissors.addEventListener("click", ()=>{
+        playRound("scissors");
+        countRound++;
+    });
+    paper.addEventListener("click", ()=>{
+        playRound("paper");
+        countRound++;
+    });
+        
+    if (userQuit){
+        const finalMessage = "Don't be a chicken! Game Over";
         console.log(finalMessage);
     }
 }
 playGame();
+
+
+
+
+
